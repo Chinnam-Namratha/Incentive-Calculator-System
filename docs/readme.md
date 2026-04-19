@@ -1,85 +1,57 @@
-Welcome to the show. This endeavor aims to provide you with insights into the functioning of projects within a real-time environment.
+# Incentive Calculator System
 
-The code has been meticulously crafted with careful consideration for various aspects. It not only nurtures your coding skills but also imparts a comprehensive comprehension of project structures.
+## What We're Building
 
-Let's Start with requirement to complete the projects:-
-1. You should have laptop with minimum 4 GB of RAM, i3 and above (Better to have 8GB with i5).
-2. Local setup of spark. This is tricky so keep all things intact to work it properly.Download python 3.10.11 instead of python3.6 or python3.9 Use this link for clean setup :- https://youtu.be/4p7gX4DBLyc
-3. PyCharm installed in the system. How to install:- https://youtu.be/pPYjX-9JAQY
-4. MySQL workbench should also be installed to the system. How to install:- https://youtu.be/JEbTIXd61kc
-5. GitHub account is good to have but not necessary.
-5. You should have AWS account. How to create:- https://youtu.be/k7522oZQi9Y
-6. Understanding of spark,sql and python is required.
+This project calculates **sales incentives** for team members based on their sales performance. It processes raw sales data, validates it, transforms it into meaningful insights, and stores the results for reporting and analysis.
 
-```plaintext
-Project structure:-
-my_project/
-├── docs/
-│   └── readme.md
+## How We're Achieving It
+
+### Technology Stack
+- **Apache Spark**: For large-scale data processing and transformations
+- **Python**: Core programming language for data pipeline
+- **MySQL**: Relational database for storing transactional and analytical data
+- **AWS S3**: Cloud storage for data files and backups
+- **SQL**: For complex data transformations and aggregations
+
+### Data Pipeline Approach
+
+1. **Extract**: Retrieve sales data from AWS S3 and MySQL databases
+2. **Validate**: Check data quality and ensure mandatory columns exist
+3. **Transform**: 
+   - Calculate incentives based on sales metrics
+   - Join dimension tables (customers, stores, sales teams)
+   - Create data marts for analytics (Customer Data Mart, Sales Data Mart)
+4. **Load**: Store processed results back into MySQL for reporting and analysis
+5. **Secure**: All credentials managed via environment variables (no hardcoded secrets)
+
+### Project Structure
+
+```
+├── src/main/
+│   ├── read/              # Data extraction from S3 and databases
+│   ├── transformations/   # ETL jobs for incentive calculations
+│   ├── write/             # Data loading to databases and storage
+│   ├── upload/            # Upload results back to S3
+│   ├── utility/           # Helper functions (logging, encryption, connections)
+│   └── delete/            # Data cleanup operations
 ├── resources/
-│   ├── __init__.py
-│   ├── dev/
-│   │    ├── config.py
-│   │    └── requirement.txt
-│   └── qa/
-│   │    ├── config.py
-│   │    └── requirement.txt
-│   └── prod/
-│   │    ├── config.py
-│   │    └── requirement.txt
-│   ├── sql_scripts/
-│   │    └── table_scripts.sql
-├── src/
-│   ├── main/
-│   │    ├── __init__.py
-│   │    └── delete/
-│   │    │      ├── aws_delete.py
-│   │    │      ├── database_delete.py
-│   │    │      └── local_file_delete.py
-│   │    └── download/
-│   │    │      └── aws_file_download.py
-│   │    └── move/
-│   │    │      └── move_files.py
-│   │    └── read/
-│   │    │      ├── aws_read.py
-│   │    │      └── database_read.py
-│   │    └── transformations/
-│   │    │      └── jobs/
-│   │    │      │     ├── customer_mart_sql_transform_write.py
-│   │    │      │     ├── dimension_tables_join.py
-│   │    │      │     ├── main.py
-│   │    │      │     └──sales_mart_sql_transform_write.py
-│   │    └── upload/
-│   │    │      └── upload_to_s3.py
-│   │    └── utility/
-│   │    │      ├── encrypt_decrypt.py
-│   │    │      ├── logging_config.py
-│   │    │      ├── s3_client_object.py
-│   │    │      ├── spark_session.py
-│   │    │      └── my_sql_session.py
-│   │    └── write/
-│   │    │      ├── database_write.py
-│   │    │      └── parquet_write.py
-│   ├── test/
-│   │    ├── scratch_pad.py.py
-│   │    └── generate_csv_data.py
+│   ├── dev/config.py      # Development configuration
+│   ├── qa/config.py       # QA configuration  
+│   ├── prod/config.py     # Production configuration
+│   └── sql_scripts/       # Database initialization
+└── docs/
+    └── readme.md          # This file
 ```
 
-How to run the program in Pycharm:-
-1. Open the pycharm editor.
-2. Upload or pull the project from GitHub.
-3. Open terminal from bottom pane.
-4. Goto virtual environment and activate it. Let's say you have venv as virtual environament.i) cd venv ii) cd Scripts iii) activate (if activate doesn't work then use ./activate)
-5. Create main.py as explained in my videos on YouTube channel.
-6. You will have to create a user on AWS also and assign s3 full access and provide secret key and access key to the config file.
-6. Run main.py from green play button on top right hand side.
-7. If everything works as expected enjoy, else re-try.
+## Key Achievements
 
-Project Architecture:-
-![Architecture](C:\Users\nikita\Pictures\Screenshots\architecture.png)
+✅ **Automated Incentive Calculation** - Processes hundreds of sales records efficiently  
+✅ **Data Security** - Environment-based credentials, no secrets in code  
+✅ **Scalable Architecture** - Modular design ready for production deployment  
+✅ **Multiple Environments** - Dev, QA, and Production configurations  
+✅ **Data Validation** - Ensures data quality before processing  
+✅ **Clean Code** - Professional project structure and best practices  
 
-Database ER Diagram:-
-![Architecture](C:\Users\nikita\Documents\data_engineering\pythonProject\youtube_project\docs\database_schema.drawio.png)
+---
 
-If you get stuck, don't forget to my watch my youtube channel project playlist for better understanding of the flow.
-My youtube channel link:- https://www.youtube.com/channel/UCacvJAgrPTjSEdnZObMzpqQ
+**Repository**: https://github.com/Chinnam-Namratha/Incentive-Calculator-System
